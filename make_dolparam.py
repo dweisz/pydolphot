@@ -161,6 +161,8 @@ def hst_params(paramfile):
 
 def rename_acs_fits(files):
 	newname_store = []
+	f1_store = []
+	f2_store = []
 	for i in range(len(files)):
 		hdu = fits.open(files[i])
 		f1 = hdu[0].header['filter1']
@@ -169,13 +171,15 @@ def rename_acs_fits(files):
 		if (f1 == 'CLEAR1L'):
 			filter2 = f2.swapcase()
 			newname = name[0]+'_'+filter2+'_'+name[1]
-		else:
+			f2_store.append(filter2)
+		elif (f2 == 'CLEAR2L'):
 			filter1 = f1.swapcase()
 			newname = name[0]+'_'+filter1+'_'+name[1]
+			f1_store.append(filter1)
 		newname_store.append(newname)
 		hdu.writeto(newname)
-
-	return filter1, filter2, newname_store
+	# only works for 2 filters for right now
+	return f1_store[0], f1_store[0], newname_store
 
 
 def makesky(files):
