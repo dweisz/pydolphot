@@ -29,7 +29,7 @@ def gen_params(paramfile):
 		'UseWCS': 1,
 		'Align': 2,
 		'AlignIter': 2,
-		'AlignTol': 4,
+		'AlignTol': 0,
 		'AlignStep': 2,
 		'AlignOnly': 0,
 		'Rotate': 1,
