@@ -169,11 +169,16 @@ def rename_acs_fits(files):
 		if (f1 == 'CLEAR1L'):
 			filter2 = f2.swapcase()
 			newname = name[0]+'_'+filter2+'_'+name[1]
+			if i==0:
+				filter1 = None
 		else:
 			filter1 = f1.swapcase()
 			newname = name[0]+'_'+filter1+'_'+name[1]
+			if i==0:
+				filter2 = None
 		newname_store.append(newname)
 		hdu.writeto(newname)
+
 	return filter1, filter2, newname_store
 
 
