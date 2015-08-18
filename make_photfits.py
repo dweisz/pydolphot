@@ -82,13 +82,14 @@ def make_phot(datafile, refname, filters, outname, full=False, summary=True, gst
 			t1 = t[wgood]
 			t1.write(sys.argv[1]+'.gst.fits', overwrite=True)
 			
-			plt.close('all')
+			'''
 			plt.figure()
 			plt.scatter(t[filters[0]+'_VEGA'] - t[filters[1]+'_VEGA'],t[filters[1]+'_VEGA'], color='k', edgecolor='None', s=0.5)
 			plt.scatter(t1[filters[0]+'_VEGA'] - t1[filters[1]+'_VEGA'],t1[filters[1]+'_VEGA'], color='r', edgecolor='None', s=0.25)
 			plt.xlim(-1,4)
 			plt.ylim(30,16)
-			plt.show()
+			'''
+
 
 			pdb.set_trace()
 
