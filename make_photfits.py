@@ -91,9 +91,6 @@ def make_phot(datafile, refname, filters, outname, full=False, summary=True, gst
 			'''
 
 
-			pdb.set_trace()
-
-
 
 
 
