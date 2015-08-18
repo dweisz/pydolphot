@@ -72,11 +72,12 @@ def make_phot(datafile, refname, filters, outname, full=False, summary=True, gst
 			snr = 5.
 			sharp = 0.1
 			crowd = 1.0
+			objtype = 1
 
 			wgood = np.where( (t[filters[0]+'_SNR'] >= snr) & (t[filters[1]+'_SNR'] >= snr) &
 						( (t[filters[0]+'_SHARP'] + t[filters[1]+'_SHARP'])**2 < sharp ) &
 						( (t[filters[0]+'_CROWD'] + t[filters[1]+'_CROWD']) < crowd ) &
-						(t['OBJECT_TYPE'] < 2) )
+						(t['OBJECT_TYPE'] < objtype) )
 
 
 			t1 = t[wgood]
