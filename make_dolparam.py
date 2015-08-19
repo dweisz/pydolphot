@@ -190,8 +190,8 @@ def rename_uvis_fits(files):
 		f1 = hdu[0].header['filter']
 		name = files[i].split('_')
 		filter = f1.swapcase()
-		newname = name[0]+'_'+filter2+'_'+name[1]
-		f1_store.append(filter2)
+		newname = name[0]+'_'+filter+'_'+name[1]
+		f1_store.append(filter)
 		newname_store.append(newname)
 		hdu.writeto(newname)
 	# only works for 2 filters for right now
