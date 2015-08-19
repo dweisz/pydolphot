@@ -195,7 +195,6 @@ def rename_uvis_fits(files):
 		newname_store.append(newname)
 		hdu.writeto(newname)
 	# only works for 2 filters for right now
-	pdb.set_trace()
 	return f1_store[0], newname_store
 
 
@@ -206,12 +205,11 @@ def makesky(files):
 
 def img_param(reference, images, paramfile):
 	file = open(paramfile, 'w')
-
 	# number of total images
 	file.write("Nimg = " + np.str(len(images)) + "\n")
 
 	# reference image
-	file.write("img0_file = " + reference[0].strip('.fits') + "\n")
+	file.write("img0_file = " + reference[0].split('.fits')[0] + "\n")
 	file.write("img0_shift = " + "0 0"  + "\n" )
 	file.write("img0_xform = " + "1 0 0" + "\n")
 	file.write("img0_raper = " + "3"  + "\n" )
@@ -221,15 +219,15 @@ def img_param(reference, images, paramfile):
 	file.write("img0_rpsf = " + "10" + "\n")
 
 	# individual image information
-	for i,j in enumerate(images):
-		file.write("img"+np.str(i+1)+'_file = ' + j.strip('.fits')  + "\n")
-		file.write("img"+np.str(i+1)+'_shift = ' + "0 0"  + "\n")
-		file.write("img"+np.str(i+1)+'_xform = ' + "1 0 0"  + "\n")	
-		file.write("img"+np.str(i+1)+'_raper = ' + "3"  + "\n")
-		file.write("img"+np.str(i+1)+'_rchi = ' + "2.0"  + "\n")	
-		file.write("img"+np.str(i+1)+'_rsky0 = ' + "15"  + "\n")
-		file.write("img"+np.str(i+1)+'_rsky1 = ' + "35"  + "\n")
-		file.write("img"+np.str(i+1)+'_rpsf = ' + "10"  + "\n")	
+	for k,j in enumerate(images):
+		file.write("img"+np.str(k+1)+'_file = ' + j.split('.fits')[0]  + "\n")
+		file.write("img"+np.str(k+1)+'_shift = ' + "0 0"  + "\n")
+		file.write("img"+np.str(k+1)+'_xform = ' + "1 0 0"  + "\n")	
+		file.write("img"+np.str(k+1)+'_raper = ' + "3"  + "\n")
+		file.write("img"+np.str(k+1)+'_rchi = ' + "2.0"  + "\n")	
+		file.write("img"+np.str(k+1)+'_rsky0 = ' + "15"  + "\n")
+		file.write("img"+np.str(k+1)+'_rsky1 = ' + "35"  + "\n")
+		file.write("img"+np.str(k+1)+'_rpsf = ' + "10"  + "\n")	
 	file.close()
 
 '''
