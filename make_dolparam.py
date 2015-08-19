@@ -292,20 +292,23 @@ for i, j in enumerate(file_extentions):
 # if no files are found, quit
 if not rawfiles:
 	raise IOError('No ACS images found')
-	
+
+
 
 # copy reference and indivudal ACS images with file_ext to current directory
 subprocess.call("cp " + raw_dir+ref_file+" "+current_dir, shell=True)
 subprocess.call("cp " + raw_dir+"*"+file_ext+"* "+current_dir, shell=True)
 
+filenames = [j.replace(raw_dir, "") for j in rawfiles] 
+
 
 # check to see if the files are gzipped
 if ref_file.split(".")[-1] == 'gz':
 	subprocess.call("gunzip " + ref_file, shell=True)
-for i in rawfiles:
+for i in filenames:
 	if i.split(".")[-1] == 'gz':
 		subprocess.call("gunzip " + i, shell=True)
-
+pdb.set_trace()
 # remove any old log file
 subprocess.call("rm -rf " + log_file, shell=True)
 
