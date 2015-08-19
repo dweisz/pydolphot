@@ -195,6 +195,7 @@ def rename_uvis_fits(files):
 		newname_store.append(newname)
 		hdu.writeto(newname)
 	# only works for 2 filters for right now
+	pdb.set_trace()
 	return f1_store[0], newname_store
 
 
