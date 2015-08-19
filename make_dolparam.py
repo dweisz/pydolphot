@@ -179,7 +179,24 @@ def rename_acs_fits(files):
 		newname_store.append(newname)
 		hdu.writeto(newname)
 	# only works for 2 filters for right now
-	return f1_store[0], f1_store[0], newname_store
+	return f1_store[0], f2_store[0], newname_store
+
+
+def rename_uvis_fits(files):
+	newname_store = []
+	f1_store = []
+	for i in range(len(files)):
+		hdu = fits.open(files[i])
+		f1 = hdu[0].header['filter']
+		name = files[i].split('_')
+		filter = f1.swapcase()
+		newname = name[0]+'_'+filter2+'_'+name[1]
+		f1_store.append(filter2)
+		newname_store.append(newname)
+		hdu.writeto(newname)
+	# only works for 2 filters for right now
+	return f1_store[0], newname_store
+
 
 
 def makesky(files):
@@ -244,12 +261,22 @@ raw_dir = current_dir+'/raw/'
 ref_file = sys.argv[1]
 log_file = 'phot.log'
 param_file = 'phot.param'
+camera = sys.argv[2]
 
 # remove old files
 subprocess.call("rm -rf *.fits " + param_file+" "+log_file, shell=True)
 
 # reference image type
-ref_extension = 'drc'
+ref_extension = ['drc', 'drz']
+
+for i, j in enumerate(ref_extension):
+	rawfiles = glob.glob(raw_dir+'*'+j+'*')
+	if not rawfiles:
+		pass
+	else:
+		ref_ext = j
+		break
+
 
 # ACS files that we want in order of preference
 file_extentions = ['crc', 'flc', 'crj', 'flt']
@@ -257,7 +284,6 @@ file_extentions = ['crc', 'flc', 'crj', 'flt']
 # check directory for various possible ACS image types in order of preference
 for i, j in enumerate(file_extentions):
 	rawfiles = glob.glob(raw_dir+'*'+j+'*')
-	pdb.set_trace
 	if not rawfiles:
 		pass
 	else:
@@ -285,18 +311,26 @@ for i in rawfiles:
 subprocess.call("rm -rf " + log_file, shell=True)
 
 # run acsmask on all fits files and create dolphot logfile
-subprocess.call("acsmask *.fits > " + log_file, shell=True)
+if camera == 'acs':
+	subprocess.call("acsmask *.fits > " + log_file, shell=True)
+
+if camera =='uvis':
+	subprocess.call("wfc3mask *.fits > " + log_file, shell=True)
 
 # run splitgroups on all fits files and append to dolphot logfile
 subprocess.call("splitgroups *.fits > " + log_file, shell=True)
-
 
 
 # gets files run through acsmask / splitgroups -- assumes all went OK
 currentfiles = glob.glob("*chip?*")
 
 # add filternames to files
-f1, f2, newfilenames = rename_acs_fits(currentfiles)
+
+if camera == 'acs':
+	f1, f2, newfilenames = rename_acs_fits(currentfiles)
+
+if camera == 'uvis':
+	f1, newfilenames = rename_uvis_fits(currentfiles)
 
 # separate reference image and other images
 
@@ -304,8 +338,8 @@ f1, f2, newfilenames = rename_acs_fits(currentfiles)
 
 makesky(newfilenames)
 
-ref_name = [x for x in newfilenames if ref_extension in x]
-img_names = [x for x in newfilenames if not ref_extension in x]
+ref_name = [x for x in newfilenames if ref_ext in x]
+img_names = [x for x in newfilenames if not ref_ext in x]
 
 img_param(ref_name, img_names, param_file)
 gen_params(param_file)
