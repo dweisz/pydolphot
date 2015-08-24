@@ -168,11 +168,11 @@ def rename_acs_fits(files):
 		f1 = hdu[0].header['filter1']
 		f2 = hdu[0].header['filter2']
 		name = files[i].split('_')
-		if (f1 == 'CLEAR1L'):
+		if ((f1 == 'CLEAR1L') | (f1 == 'CLEAR1S') ):
 			filter2 = f2.swapcase()
 			newname = name[0]+'_'+filter2+'_'+name[1]
 			f2_store.append(filter2)
-		elif (f2 == 'CLEAR2L'):
+		elif ((f2 == 'CLEAR2L') | (f2 == 'CLEAR2S')):
 			filter1 = f1.swapcase()
 			newname = name[0]+'_'+filter1+'_'+name[1]
 			f1_store.append(filter1)
@@ -308,7 +308,6 @@ if ref_file.split(".")[-1] == 'gz':
 for i in filenames:
 	if i.split(".")[-1] == 'gz':
 		subprocess.call("gunzip " + i, shell=True)
-pdb.set_trace()
 # remove any old log file
 subprocess.call("rm -rf " + log_file, shell=True)
 
