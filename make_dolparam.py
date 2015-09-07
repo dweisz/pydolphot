@@ -327,10 +327,10 @@ currentfiles = glob.glob("*chip?*")
 
 # add filternames to files
 
-if camera == 'acs':
+if camera.lower() == 'acs':
 	f1, f2, newfilenames = rename_acs_fits(currentfiles)
 
-if camera == 'uvis':
+if camera.lower() == 'uvis':
 	f1, newfilenames = rename_uvis_fits(currentfiles)
 
 # separate reference image and other images
