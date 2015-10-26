@@ -77,7 +77,7 @@ def proc_acs(files, log_file='phot.log'):
 			newname = name[0]+'_'+filter1+'_'+name[1]
 			f1_store.append(filter1)
 		newname_store.append(newname)
-		hdu.writeto(newname)
+		hdu.writeto(newname, clobber=True)
 
 
 	# run acsmask on all ACS files
@@ -104,7 +104,7 @@ def proc_wfc3(files, log_file='phot.log'):
 		newname = name[0]+'_'+filter+'_'+name[1]
 		f1_store.append(filter)
 		newname_store.append(newname)
-		hdu.writeto(newname)
+		hdu.writeto(newname, clobber=True)
 
 	# run acsmask on all ACS files
 	for j in newname_store:
@@ -133,7 +133,7 @@ def proc_wfpc2(files, log_file='phot.log'):
 			newname = name[0]+'_'+filter2+'_'+name[1]
 			f2_store.append(filter2)
 		newname_store.append(newname)
-		hdu.writeto(newname)
+		hdu.writeto(newname, clobber=True)
 	# only works for 2 filters for right now
 
 	# run acsmask on all ACS files
