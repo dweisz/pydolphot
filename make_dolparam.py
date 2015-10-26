@@ -20,7 +20,7 @@ def load_files(ref_file,rawdir='raw/', log_file='phot.log', param_file='phot.par
 
 	# get rid of drz or drc files from rawlist
 	img_names = [x for x in filenames if not 'drc' in x]
-	img_names = [x for x in filenames if not 'drz' in x]
+	img_names = [x for x in img_names if not 'drz' in x]
 	
 	if not rawfiles:
 		raise IOError('No images found')
@@ -83,11 +83,13 @@ def proc_acs(files, log_file='phot.log'):
 	# run acsmask on all ACS files
 	for j in newname_store:
 		subprocess.call("acsmask " + j + " > " + log_file, shell=True)
-	for i in newname_store:
+		subprocess.call("splitgroups " + j + " > " + log_file, shell=True)
+	splitnames = glob.glob('*chip*')
+	for i in splitnames:
 		subprocess.call("calcsky "+ i.replace('.fits', '') +"  15 35 -128 2.25 2.00 >> " + log_file, shell=True)
 
 	# only works for 2 filters for right now
-	return newname_store
+	return splitnames
 
 
 
@@ -217,16 +219,23 @@ def image_params(images, img_num, camera, paramfile):
 
 	for j in images:
 		file.write("img"+np.str(k)+'_file = ' + j.split('.fits')[0]  + "\n")
-		file.write("img"+np.str(k)+'_shift = ' + params['shift'] + "\n")
-		file.write("img"+np.str(k)+'_xform = ' + params['xform']  + "\n")	
-		file.write("img"+np.str(k)+'_raper = ' + params['raper'] + "\n")
-		file.write("img"+np.str(k)+'_rchi = ' + params['rchi']  + "\n")	
-		file.write("img"+np.str(k)+'_rsky0 = ' + params['rsky0']  + "\n")
-		file.write("img"+np.str(k)+'_rsky1 = ' + params['rsky1']  + "\n")
-		file.write("img"+np.str(k)+'_rpsf = ' + params['rpsf']  + "\n")
-		file.write("img"+np.str(k)+'_apsky = ' + params['apsky']  + "\n")
 		k+=1
+	file.write("\n")
 	file.close()
+	file = open(paramfile, 'a')
+	k=1 # reset image counter
+        for j in images:
+                file.write("img"+np.str(k)+'_shift = ' + params['shift'] + "\n")
+                file.write("img"+np.str(k)+'_xform = ' + params['xform']  + "\n")
+                file.write("img"+np.str(k)+'_raper = ' + params['raper'] + "\n")
+                file.write("img"+np.str(k)+'_rchi = ' + params['rchi']  + "\n")
+                file.write("img"+np.str(k)+'_rsky0 = ' + params['rsky0']  + "\n")
+                file.write("img"+np.str(k)+'_rsky1 = ' + params['rsky1']  + "\n")
+                file.write("img"+np.str(k)+'_rpsf = ' + params['rpsf']  + "\n")
+                file.write("img"+np.str(k)+'_apsky = ' + params['apsky']  + "\n")
+                k+=1
+	file.write("\n")
+        file.close()
 	
 
 ref = sys.argv[1]
