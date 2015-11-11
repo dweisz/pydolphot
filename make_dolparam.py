@@ -81,13 +81,14 @@ def proc_acs(files, log_file='phot.log'):
 
 
 	# run acsmask on all ACS files
+	splitnames = []
 	for j in newname_store:
 		subprocess.call("acsmask " + j + " > " + log_file, shell=True)
 		subprocess.call("splitgroups " + j + " > " + log_file, shell=True)
-	splitnames = glob.glob('*chip*.fits')
-	for i in splitnames:
-		subprocess.call("calcsky "+ i.replace('.fits', '') +"  15 35 -128 2.25 2.00 >> " + log_file, shell=True)
-
+		subprocess.call("calcsky "+ j.replace('.fits', '.chip1') +"  15 35 -128 2.25 2.00 >> " + log_file, shell=True)
+		subprocess.call("calcsky "+ j.replace('.fits', '.chip2') +"  15 35 -128 2.25 2.00 >> " + log_file, shell=True)
+		splitnames.append(j.replace('.fits', '.chip1.fits'))
+		splitnames.append(j.replace('.fits', '.chip2.fits'))
 	# only works for 2 filters for right now
 	return splitnames
 
@@ -245,20 +246,24 @@ param_file = 'phot.param'
 # load in HST images
 acs_list, wfc3_list, wfpc2_list, ref_list = load_files(ref)
 
+
 # process acs, wfc3, and wfpc2 files
 acs_files = proc_acs(acs_list)
+
 wfc3_files = proc_wfc3(wfc3_list)
 wfpc2_files = proc_wfpc2(wfpc2_list)
 
 # separate wfc3_ir and wfc3_uvis
 wfc3_ir_files, wfc3_uvis_files = [], []
-for i in wfc3_files:
-	hdu = fits.open(i)
-	temp = hdu[0].header['DETECTOR']
-	if temp == 'UVIS':
-		wfc3_uvis_files.append(i)
-	if temp == 'IR':
-		wfc3_ir_files.append(i)
+if wfc3_files:
+	for i in wfc3_files:
+		hdu = fits.open(i)
+		temp = hdu[0].header['DETECTOR']
+		if temp == 'UVIS':
+			wfc3_uvis_files.append(i)
+		if temp == 'IR':
+			wfc3_ir_files.append(i)
+
 
 
 # process reference file
@@ -271,9 +276,10 @@ if temp == 'ACS':
 if temp == 'WFPC2':
 	ref_file = proc_wfpc2(ref_list)
 
+
 '''  write out paramter file '''
 
-number_images = len(acs_files) + len(wfc3_ir_files) + len(wfc3_uvis_files) + len(wfpc2_files)
+number_images = len(acs_files) + len(wfc3_files) + len(wfpc2_files)
 
 
 # write number of images
@@ -285,29 +291,28 @@ file.close()
 
 ref_params(ref_file, param_file)
 
-
 # start counter for image numbers
 k=1
 
 if acs_files:
 	image_params(acs_files, k, 'acs', param_file)
 	k += len(acs_files)
-	#pdb.set_trace()
+	
 
 if wfc3_uvis_files:
 	image_params(wfc3_uvis_files, k, 'uvis', param_file)
 	k += len(wfc3_uvis_files)
-	#pdb.set_trace()
+	
 
 if wfc3_ir_files:
 	image_params(wfc3_ir_files, k, 'ir', param_file)
 	k += len(wfc3_ir_files)
-	#pdb.set_trace()
+	
 
 if wfpc2_files:
 	image_params(wfpc2_files, k, 'wfpc2', param_file)
 	k += len(wfpc2_files)
-	#pdb.set_trace()
+	
 
 
 
