@@ -84,7 +84,7 @@ def proc_acs(files, log_file='phot.log'):
 	for j in newname_store:
 		subprocess.call("acsmask " + j + " > " + log_file, shell=True)
 		subprocess.call("splitgroups " + j + " > " + log_file, shell=True)
-	splitnames = glob.glob('*chip*')
+	splitnames = glob.glob('*chip*.fits')
 	for i in splitnames:
 		subprocess.call("calcsky "+ i.replace('.fits', '') +"  15 35 -128 2.25 2.00 >> " + log_file, shell=True)
 
@@ -169,7 +169,7 @@ def image_params(images, img_num, camera, paramfile):
 		'rsky1': '35',
 		'rpsf': '10',
 		'apsky': '15 25',
-		'shift': '0',
+		'shift': '0 0',
 		'xform': '1 0 0'
 		}
 
@@ -180,7 +180,7 @@ def image_params(images, img_num, camera, paramfile):
 		'rsky1': '35',
 		'rpsf': '10',
 		'apsky': '15 25',
-		'shift': '0',
+		'shift': '0 0',
 		'xform': '1 0 0'
 		}
 
@@ -191,7 +191,7 @@ def image_params(images, img_num, camera, paramfile):
 		'rsky1': '20',
 		'rpsf': '10',
 		'apsky': '15 25',
-		'shift': '0',
+		'shift': '0 0',
 		'xform': '1 0 0'
 		}
 
@@ -202,7 +202,7 @@ def image_params(images, img_num, camera, paramfile):
 		'rsky1': '20',
 		'rpsf': '10',
 		'apsky': '15 25',
-		'shift': '0',
+		'shift': '0 0',
 		'xform': '1 0 0'
 		}
 
