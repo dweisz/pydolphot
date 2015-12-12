@@ -110,13 +110,16 @@ def proc_wfc3(files, log_file='phot.log'):
 		hdu.writeto(newname, clobber=True)
 
 	# run acsmask on all ACS files
+	splitnames = []
 	for j in newname_store:
 		subprocess.call("wfc3mask " + j + " > " + log_file, shell=True)
-	for i in newname_store:
-		subprocess.call("calcsky "+ i.replace('.fits', '') +"  15 35 -128 2.25 2.00 >> " + log_file, shell=True)
-
+		subprocess.call("splitgroups " + j + " > " + log_file, shell=True)
+		subprocess.call("calcsky "+ j.replace('.fits', '.chip1') +"  15 35 -128 2.25 2.00 >> " + log_file, shell=True)
+		subprocess.call("calcsky "+ j.replace('.fits', '.chip2') +"  15 35 -128 2.25 2.00 >> " + log_file, shell=True)
+		splitnames.append(j.replace('.fits', '.chip1.fits'))
+		splitnames.append(j.replace('.fits', '.chip2.fits'))
 	# only works for 2 filters for right now
-	return newname_store
+	return splitnames
 
 def proc_wfpc2(files, log_file='phot.log'):
 	newname_store = []
