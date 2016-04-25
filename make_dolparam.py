@@ -85,10 +85,12 @@ def proc_acs(files, log_file='phot.log'):
 	for j in newname_store:
 		subprocess.call("acsmask " + j + " > " + log_file, shell=True)
 		subprocess.call("splitgroups " + j + " > " + log_file, shell=True)
-		subprocess.call("calcsky "+ j.replace('.fits', '.chip1') +"  15 35 -128 2.25 2.00 >> " + log_file, shell=True)
-		subprocess.call("calcsky "+ j.replace('.fits', '.chip2') +"  15 35 -128 2.25 2.00 >> " + log_file, shell=True)
-		splitnames.append(j.replace('.fits', '.chip1.fits'))
-		splitnames.append(j.replace('.fits', '.chip2.fits'))
+		if j.replace('.fits', '.chip1'):
+			subprocess.call("calcsky "+ j.replace('.fits', '.chip1') +"  15 35 -128 2.25 2.00 >> " + log_file, shell=True)
+			splitnames.append(j.replace('.fits', '.chip1.fits'))
+		if j.replace('.fits', '.chip2'):
+			subprocess.call("calcsky "+ j.replace('.fits', '.chip2') +"  15 35 -128 2.25 2.00 >> " + log_file, shell=True)
+			splitnames.append(j.replace('.fits', '.chip2.fits'))
 	# only works for 2 filters for right now
 	return splitnames
 
