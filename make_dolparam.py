@@ -57,7 +57,7 @@ def load_files(ref_file,rawdir='raw/', log_file='phot.log', param_file='phot.par
 	return acs_list, wfc3_list, wfpc2_list, [ref_file]
 
 
-def proc_acs(files, log_file='phot.log'):
+def proc_acs(files, log_file='phot.log', ref=False):
 
 	# rename files to include filter name
 	newname_store = []
@@ -85,10 +85,12 @@ def proc_acs(files, log_file='phot.log'):
 	for j in newname_store:
 		subprocess.call("acsmask " + j + " > " + log_file, shell=True)
 		subprocess.call("splitgroups " + j + " > " + log_file, shell=True)
-		if j.replace('.fits', '.chip1'):
+		if ref == True:
 			subprocess.call("calcsky "+ j.replace('.fits', '.chip1') +"  15 35 -128 2.25 2.00 >> " + log_file, shell=True)
 			splitnames.append(j.replace('.fits', '.chip1.fits'))
-		if j.replace('.fits', '.chip2'):
+		elif ref == False:
+			subprocess.call("calcsky "+ j.replace('.fits', '.chip1') +"  15 35 -128 2.25 2.00 >> " + log_file, shell=True)
+			splitnames.append(j.replace('.fits', '.chip1.fits'))
 			subprocess.call("calcsky "+ j.replace('.fits', '.chip2') +"  15 35 -128 2.25 2.00 >> " + log_file, shell=True)
 			splitnames.append(j.replace('.fits', '.chip2.fits'))
 	# only works for 2 filters for right now
@@ -96,7 +98,7 @@ def proc_acs(files, log_file='phot.log'):
 
 
 
-def proc_wfc3(files, log_file='phot.log'):
+def proc_wfc3(files, log_file='phot.log', ref=False):
 
 	# rename files to include filter name
 	newname_store = []
@@ -116,10 +118,12 @@ def proc_wfc3(files, log_file='phot.log'):
 	for j in newname_store:
 		subprocess.call("wfc3mask " + j + " > " + log_file, shell=True)
 		subprocess.call("splitgroups " + j + " > " + log_file, shell=True)
-		if j.replace('.fits', '.chip1'):
+		if ref == True:
 			subprocess.call("calcsky "+ j.replace('.fits', '.chip1') +"  15 35 -128 2.25 2.00 >> " + log_file, shell=True)
 			splitnames.append(j.replace('.fits', '.chip1.fits'))
-		if j.replace('.fits', '.chip2'):
+		elif ref == False:
+			subprocess.call("calcsky "+ j.replace('.fits', '.chip1') +"  15 35 -128 2.25 2.00 >> " + log_file, shell=True)
+			splitnames.append(j.replace('.fits', '.chip1.fits'))
 			subprocess.call("calcsky "+ j.replace('.fits', '.chip2') +"  15 35 -128 2.25 2.00 >> " + log_file, shell=True)
 			splitnames.append(j.replace('.fits', '.chip2.fits'))
 	# only works for 2 filters for right now
@@ -281,9 +285,9 @@ if wfc3_files:
 hdu = fits.open(ref_list[0])
 temp = hdu[0].header['INSTRUME']
 if temp == 'WFC3':
-	ref_file = proc_wfc3(ref_list)
+	ref_file = proc_wfc3(ref_list, ref=True)
 if temp == 'ACS':
-	ref_file = proc_acs(ref_list)
+	ref_file = proc_acs(ref_list, ref=True)
 if temp == 'WFPC2':
 	ref_file = proc_wfpc2(ref_list)
 
