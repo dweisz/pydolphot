@@ -70,8 +70,8 @@ First part of the DOLPHOT parameter file is specifying the reference and science
 
 Nimg = 4 # specifies the number of science images
 img0_file = jcnb01020_f814w_drc.chip1 # reference image
-img0_shift = 0 0  # shift in (x,y) pixels wrt to reference image. Should be set for reference image.
-img0_xform = 1 0 0 # scale ratio, cubic distortion, and rotation of the image relative to the reference image. Should be set for reference image.
+img0_shift = 0 0  # shift in (x,y) pixels wrt to reference image. Should not be set for reference image.
+img0_xform = 1 0 0 # scale ratio, cubic distortion, and rotation of the image relative to the reference image.Should not be set for reference image.
 img1_file = jcnb01lyq_f475w_flc.chip1
 img1_shift = 0 0
 img1_xform = 1 0 0
