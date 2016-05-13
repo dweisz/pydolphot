@@ -123,15 +123,20 @@ PSFres = 1           #make PSF residual image? (int 0=no,1=yes)
 psfoff = 0.0         #coordinate offset (PSF system - dolphot system)
 DiagPlotType = PS    # create .ps diagnostic plots (requires pgplot)
 UseWCS = 1           # use WCS from .fits headers for alignment
-#UseACS = 1          #ACS PSF library
-ACSpsfType = 0
+ACSpsfType = 0       # 0 = Tiny Tim, 1 = Anderson
 InterpPSFlib = 1     #interpolate PSF library spatially
 ACSuseCTE = 0        # use CTE corrections y/n = 1/0
 CombineChi = 1
 ```
 
+With image pre-processing done and the parameter file setup, the last step is to execute DOLPHOT.  This is simply done with:
 
 
+``` tcsh
+> dolphot ngc6822_acs_grid4.phot -pphot.param >> phot.log &
+```
+
+where ngc6822_acs_grid4.phot will be the name of the output photometry file and phot.param is the name of the parameter file.  Note that in this instance DOLPHOT is set to run in the background.  For small image stacks (e.g., 4 images) this might be OK.  But for large image stacks, DOLPHOT can take quite some time to run, and it will lose all progress if interrupted.  It is recommended that DOLPHOT is submitted via a queue system (slurm, etc.) to a machine that is not likely to be interrupted, whenever possible.
 
 
 
