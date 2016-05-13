@@ -175,13 +175,40 @@ usage of _pydolphot_ requires numpy, glob, and astropy in order to handle .fits 
 > python ../make_dolparam.py reference_file
 > ls
 
+
+> dolphot ngc6822_acs_grid4.phot -pphot.param >> phot.log &
 ```
 
 First, make_dolphot.param removes.fits files and exisiting parameter and log files in your directory.  It copies and unzips images on the specficied reference file and all HST science images types it finds in 'raw'. It detects the images type and runs the appropriate pixel masking routine (e.g., _acsmask_), _splitgroups_, _calcsky_, and finally generates 'phot.param'. 
 
-I have tested it on all ACS, UVIS, WFC3/IR, and WFPC2 science files and it works. However, it is a work in progress and has bugs.  Currently, it should exectute all image pre-processing correctly and generate a parameter file.  However, expect to inspect and edit the parameter file before running (e.g., it currently defaults to best global parameters for ACS, doesn't generate all WFPC2 information).  Feel free to raise issues or fork the repository and fix bugs or add features.
+I have tested it on all ACS, UVIS, WFC3/IR, and WFPC2 science files and it works. However, it is a work in progress and has bugs.  Currently, it should exectute all image pre-processing correctly and generate a parameter file.  However, expect to inspect and edit the parameter file before running DOLPHOT (e.g., make_dolparam.py currently defaults to best global parameters for ACS, doesn't generate all WFPC2 information).  Feel free to raise issues or fork the repository and fix bugs or add features.
 
 
+#### DOLPHOT Output
+
+
+Upon completion DOLPHOT will have added a number of files to the working directory. Most contain useful diagnostic information (e.g., PSF residuals, aperture corrections).  For now, let's focus on getting the photometry processed into a usable format.  The raw photometry is in this file:
+
+``` tcsh
+ngc6822_acs_grid4.phot
+```
+
+each row contains an entry for a single stars including photometry measured in each exposure, the global photometry solution (i.e., all exposures combined), and quality information.  Each of these values are store per column.  The column metadata is stored in:
+
+``` tcsh
+ngc6822_acs_grid4.phot.columns
+```
+
+Typically, we will want to apply cuts to the photometry based on S/N, sharpness, crowding, and perhaps other quality criteria.  This can simply be done using something like awk or through python, etc.
+
+I have written a basic python utility, make_photfits.py' that takes the raw dolphot file and compresses it to a binary .fits file.  Currently, it only works with 2 filter photometry. To execute:
+
+
+``` tcsh
+> python /home/astro/pydolphot/make_photfits.py raw_photometry outputname 'F475W F814W' reference.fits
+> ls
+
+```
 
 
 
