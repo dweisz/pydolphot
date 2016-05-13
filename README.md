@@ -16,7 +16,7 @@ images
 I'll explore two examples, running DOLPHOT manually, and running DOLPHOT with **pydolphot**.
 
 
-#### Running DOLPHOT manually: 
+#### Running DOLPHOT manually 
 
 
 
