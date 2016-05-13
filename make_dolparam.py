@@ -305,7 +305,7 @@ def dolparams(paramfile):
 	file = open(paramfile, 'a')
 	for i in dolphot_params.keys():
     	file.write(i+ ' = ' +np.str(dolphot_params[i])+"\n")
-    	file.close()
+    file.close()
 
 
 
