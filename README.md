@@ -6,7 +6,7 @@ This DOLPHOT example makes use of 'Grid 4' HST/ACS images from [HST-GO-12180](ht
 
 ``` tcsh
 > pwd
-NGC6822
+/home/astro/photometry/NGC6822
 > ls
 raw/
 > ls/raw/
