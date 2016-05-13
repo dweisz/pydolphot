@@ -23,3 +23,15 @@ The first step is to copy the a reference image (usually a drizzled image) and a
 > ls
 images
 ```
+
+The second step is to run _acsmask_ (or _wfc3mask_ or _wfpc2mask_, for WFC3 or WFPC2 images) on each of the images.
+
+``` tcsh
+> acsmask image1
+> acsmask image2
+> acsmask image3
+> ls
+images
+```
+
+
