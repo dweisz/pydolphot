@@ -19,7 +19,7 @@ I'll explore two examples, running DOLPHOT manually, and running DOLPHOT with **
 * Running DOLPHOT manually: 
 
 
-```
+
 
 The first step is to copy the a reference image (usually a drizzled image) and all the science images (usually flt or flc images) from the raw directory to the current directory. Images will be modified by DOLPHOT and we want to preserve the originals in case its necessary to start over.
 
