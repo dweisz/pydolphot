@@ -128,7 +128,7 @@ UseWCS = 1           # use WCS from .fits headers for alignment
 ACSpsfType = 0       # 0 = Tiny Tim, 1 = Anderson
 InterpPSFlib = 1     #interpolate PSF library spatially
 ACSuseCTE = 0        # use CTE corrections y/n = 1/0
-CombineChi = 1
+CombineChi = 1       # weight combined photometry by chi^2 per exposure y/n = 1/0
 ```
 
 With image pre-processing done and the parameter file setup, the last step is to execute DOLPHOT.  This is simply done with:
