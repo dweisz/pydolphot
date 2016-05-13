@@ -295,7 +295,7 @@ def dolparams(paramfile):
 	'WFC3UVISpsfType': 0,
 	'WFC3IRpsfType': 0,
 	'WFC3useCTE': 0,
-	'CombineChi': 1
+	'CombineChi': 1,
 	'#FakeStars': 'fake.list',
 	'#FakeMatch': 3.0,
 	'#FakeStarPSF': 1.5,
