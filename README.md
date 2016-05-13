@@ -33,5 +33,12 @@ The second step is to run _acsmask_ (or _wfc3mask_ or _wfpc2mask_, for WFC3 or W
 > ls
 images
 ```
+The third step is to run _splitgroups_, which splits the image files into each chip.  Some cameras, e.g., HST/HRC, do not have multiple chips.
 
+``` tcsh
+> splitgroups *.fits >> phot.log
+> ls
+images
+```
+ 
 
