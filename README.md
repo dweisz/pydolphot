@@ -24,12 +24,12 @@ The first step is to copy the a reference image (usually a drizzled image) and a
 images
 ```
 
-The second step is to run _acsmask_ (or _wfc3mask_ or _wfpc2mask_, for WFC3 or WFPC2 images) on each of the images.
+The second step is to run _acsmask_ (or _wfc3mask_ or _wfpc2mask_, for WFC3 or WFPC2 images) on each of the images and store the output in a log file.  _acsmask_ masks out all pixels flagged as bad in the data quality image, and multiplies by the pixel areas so that the resulting images are approximately in units of electrons on the raw image. A masked or saturated pixel is skipped by all other DOLPHOT routines - it is not used in sky determination, photometry, aperture corrections, etc.
 
 ``` tcsh
-> acsmask image1
-> acsmask image2
-> acsmask image3
+> acsmask image1 >> phot.log
+> acsmask image2 >> phot.log
+> acsmask image3 >> phot.log
 > ls
 images
 ```
