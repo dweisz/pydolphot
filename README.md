@@ -84,12 +84,51 @@ img3_xform = 1 0 0
 img4_file = jcnb01lyq_f475w_flc.chip1
 img4_shift = 0 0
 img4_xform = 1 0 0
-
-
-images
 ```
 
+Next we have to set each of the photometry parameters for DOLPHOT.
 
+``` tcsh
+> more phot.param 
+
+RAper = 3            #photometry apeture size (flt)
+Rchi = 3.0           #chi statistic apeture size (flt)
+PSFPhot = 1          #photometry type (int/0=aper,1=psf,2=wtd-psf)
+FitSky = 2           #fit sky? (int/0=no,1=yes,2=small,3=with-phot)
+RSky0 = 15           #inner sky radius (flt>=RAper+0.5)
+Rsky1 = 35           #outer sky radius (flt>=RSky0+1)
+SkipSky = 2          #spacing for sky measurement (int>0)
+SkySig = 2.25        #sigma clipping for sky (flt>=1)
+SecondPass = 5       #second pass finding stars (int 0=no,1=yes)
+SearchMode = 1       #searching algorithm (int 0=S/N/chi,1=1/chi)
+SigFind = 2.5        #sigma detection threshold (flt)
+SigFindMult = 0.85   #Multiple for quick-and-dirty photometry (flt>0)
+SigFinal = 3.5       #sigma output threshold (flt)
+SubResRef = 1        #subpixel resolution for reference image (int>0)
+MaxIT = 25           #maximum iterations (int>0)
+NoiseMult = 0.10     #noise multiple in imgadd (flt)
+FSat = 0.999         #fraction of saturate limit (flt)
+FlagMask = 4         #Use Saturated Cores? (4 if yes)
+ApCor = 1            #find/make aperture corrections? (int 0=no,1=yes)
+Force1 = 1           #force type 1/2 (stars)? (int 0=no,1=yes)
+Align = 2            #align images? (int 0=no,1=const,2=lin,3=cube)
+Rotate = 1           #allow cross terms in alignment? (int 0=no, 1=yes)
+RCentroid = 1        #centroid box size (int>0)
+PosStep = 0.25       #search step for position iterations (flt)
+dPosMax = 2.5        #maximum single-step in position iterations (flt)
+RCombine = 3.0       #minimum separation for two stars for cleaning (flt)
+RPSF = 10            #PSF size (int>0)
+SigPSF = 5.0         #min S/N for psf parameter (flt)
+PSFres = 1           #make PSF residual image? (int 0=no,1=yes)
+psfoff = 0.0         #coordinate offset (PSF system - dolphot system)
+DiagPlotType = PS    # create .ps diagnostic plots (requires pgplot)
+UseWCS = 1           # use WCS from .fits headers for alignment
+#UseACS = 1          #ACS PSF library
+ACSpsfType = 0
+InterpPSFlib = 1     #interpolate PSF library spatially
+ACSuseCTE = 0        # use CTE corrections y/n = 1/0
+CombineChi = 1
+```
 
 
 
