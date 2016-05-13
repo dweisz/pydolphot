@@ -41,9 +41,11 @@ The next step is to run _splitgroups_, which splits the image files into each ch
 images
 ```
 
-The next step is to run _calcsky_ on each image for each chip.  This includes both reference and science images.  _calcsky_ creates a sky image, which depending on your DOLPHOT parameters, can either provide an initial guess of the sky map or a definitive measurement. The sky computation is made by taking all pixels in an annulus around the pixel in question. The annulus extends from **r<sub>in</sub>** to **rout** pixels from the pixel whose value is being measured, and is sampled every step pixels. While **step = 1** will always work, one can typically set step to the PSF size and achieve equally good results.  The recommended paramters for ACS/WFC images are:
+The next step is to run _calcsky_ on each image for each chip.  This includes both reference and science images.  _calcsky_ creates a sky image, which depending on your DOLPHOT parameters, can either provide an initial guess of the sky map or a definitive measurement. The sky computation is made by taking all pixels in an annulus around the pixel in question. The annulus extends from **r<sub>in</sub>** to **r<sub>out</sub>** pixels from the pixel whose value is being measured, and is sampled every step pixels. While **step** = 1 will always work, one can typically set step to the PSF size and achieve equally good results.  The recommended paramters for ACS/WFC images are:
 
-* **rin** = 15
-
-
+* **r<sub>in</sub>** = 15
+* **r<sub>in</sub>** = 15
+* **step** = -128 (for a quick estimate; 4 for a more accurate, but slower measurement)
+* **$$\sigma$$<sub>low</sub>** = 2.25
+* **$$\sigma$$<sub>low</sub>** = 2.00
 
