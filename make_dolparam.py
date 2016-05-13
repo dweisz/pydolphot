@@ -254,6 +254,61 @@ def image_params(images, img_num, camera, paramfile):
         file.close()
 	
 
+def dolparams(paramfile):
+	# need to add WFPC2 data
+	# should automatically adjust values according to image types
+	dolphot_params = {
+	'RAper': 3,
+	'Rchi': 3.0,
+	'PSFPhot': 1,
+	'FitSky': 2,
+	'RSky0': 15,
+	'RSky1': 35,
+	'SkipSky': 2,
+	'SkySig': 2.25,
+	'SecondPass': 5,
+	'SearchMode': 1,
+	'SigFind': 2.5,
+	'SigFindMult':0.85,
+	'SigFinal': 3.5,
+	'SubResRef': 1,
+	'MaxIT': 25,
+	'NoiseMult': 0.10,
+	'FSat': 0.999,
+	'FlagMask': 4,
+	'ApCor': 1,
+	'Force1': 1,
+	'Align': 2,
+	'Rotate': 1,
+	'RCentroid': 1,
+	'PosStep': 0.25,
+	'dPosMax': 2.5,
+	'RCombine': 3.0,
+	'RPSF': 10,
+	'SigPSF': 5.0,
+	'PSFres': 1,
+	'psfoff': 0.0,
+	'DiagPlotType': 'PS',
+	'UseWCS': 1,
+	'ACSpsfType': 0,
+	'ACSuseCTE': 0,
+	'WFC3UVISpsfType': 0,
+	'WFC3IRpsfType': 0,
+	'WFC3useCTE': 0,
+	'CombineChi': 1
+	'#FakeStars': 'fake.list',
+	'#FakeMatch': 3.0,
+	'#FakeStarPSF': 1.5,
+	'#RandomFake':1
+	}
+
+	file = open(paramfile, 'a')
+	for i in dolphot_params.keys():
+    	file.write(i+ ' = ' +np.str(dolphot_params[i])+"\n")
+    file.close()
+
+
+
 ref = sys.argv[1]
 log_file = 'phot.log'
 param_file = 'phot.param'
@@ -329,6 +384,9 @@ if wfpc2_files:
 	k += len(wfpc2_files)
 	
 
+# add gloal dolphot parameters
+
+dolparams(paramfile)
 
 
 
