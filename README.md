@@ -136,7 +136,7 @@ With image pre-processing done and the parameter file setup, the last step is to
 > dolphot ngc6822_acs_grid4.phot -pphot.param >> phot.log &
 ```
 
-where ngc6822_acs_grid4.phot will be the name of the output photometry file and phot.param is the name of the parameter file.  Note that in this instance DOLPHOT is set to run in the background.  For small image stacks (e.g., 4 images) this might be OK.  But for large image stacks, DOLPHOT can take quite some time to run, and it will lose all progress if interrupted.  It is recommended that DOLPHOT is submitted via a queue system (slurm, etc.) to a machine that is not likely to be interrupted, whenever possible.
+where **ngc6822_acs_grid4.phot** will be the name of the output photometry file and **phot.param** is the name of the parameter file.  Note that in this instance DOLPHOT is set to run in the background.  For small image stacks (e.g., 4 images) this might be OK.  But for large image stacks, DOLPHOT can take quite some time to run, and it will lose all progress if interrupted.  It is recommended that DOLPHOT is submitted via a queue system (slurm, etc.) to a machine that is not likely to be interrupted, whenever possible.
 
 
 
