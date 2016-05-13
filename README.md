@@ -140,5 +140,51 @@ With image pre-processing done and the parameter file setup, the last step is to
 
 where **ngc6822_acs_grid4.phot** will be the name of the output photometry file and **phot.param** is the name of the parameter file.  Note that in this instance DOLPHOT is set to run in the background.  For small image stacks (e.g., 4 images) this might be OK.  But for large image stacks, DOLPHOT can take quite some time to run, and it will lose all progress if interrupted.  It is recommended that DOLPHOT is submitted via a queue system (slurm, etc.) to a machine that is not likely to be interrupted, whenever possible.
 
+#### Running DOLPHOT with _pydolphot_
+
+Assuming this directory strucutre:
+
+``` tcsh
+> pwd
+/home/astro/photometry/NGC6822
+> ls
+raw/
+> ls/raw/
+images
+```  
+
+_pydolphot_ provides a simpler interface that executes all the pre-processing steps and generates a DOLPHOT parameter file.
+
+The first thing to do is clone the pydolphot repository locally, e.g.,:
+
+``` tcsh
+> pwd
+/home/astro/
+> git clone https://github.com/dweisz/pydolphot.git
+...
+> ls pydolphot/
+LICENSE  README.md  make_dolparam.py  make_photfits.py
+```  
+
+usage of _pydolphot_ requires numpy, glob, and astropy in order to handle .fits files.  Other dependancies should be native to python.  To run image pre-processing and generate a parameter file:
+
+
+``` tcsh
+> pwd
+/home/astro/photometry/NGC6822
+> python ../make_dolparam.py reference_file
+> ls
+
+```
+
+First, make_dolphot.param removes.fits files and exisiting parameter and log files in your directory.  It copies and unzips images on the specficied reference file and all HST science images types it finds in 'raw'. It detects the images type and runs the appropriate pixel masking routine (e.g., _acsmask_), _splitgroups_, _calcsky_, and finally generates 'phot.param'. 
+
+I have tested it on all ACS, UVIS, WFC3/IR, and WFPC2 science files and it works. However, it is a work in progress and has bugs.  Currently, it should exectute all image pre-processing correctly and generate a parameter file.  However, expect to inspect and edit the parameter file before running (e.g., it currently defaults to best global parameters for ACS, doesn't generate all WFPC2 information).  Feel free to raise issues or fork the repository and fix bugs or add features.
+
+
+
+
+
+
 
 
