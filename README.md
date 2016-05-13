@@ -60,5 +60,27 @@ The next step is to run _calcsky_ on each image for each chip.  This includes bo
 images
 ```
 
+Running _calcsky_ completes the preprocessing steps and now we can run DOLPHOT.  
+The first step for running DOLPHOT is setting up a parameter file (called 'phot.param' in this case). In this example, I'll show you and already constructed parameter file. 
+
+First part of the DOLPHOT parameter file is specifying the reference and science images.
+
+``` tcsh
+> more phot.param 
+
+Nimg = 4 # specifies the number of science images
+img0_file = jcnb01020_f814w_drc.chip1 # reference image
+img0_shift = 0 0  # shift in (x,y) pixels wrt to reference image. Should be set for reference image.
+img0_xform = 1 0 0 # scale ratio, cubic distortion, and rotation of the image relative to the reference image. Should be set for reference image.
+
+
+images
+```
+
+
+
+
+
+
 
 
