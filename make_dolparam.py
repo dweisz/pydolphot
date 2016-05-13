@@ -386,7 +386,7 @@ if wfpc2_files:
 
 # add gloal dolphot parameters
 
-dolparams(paramfile)
+dolparams(param_file)
 
 
 
