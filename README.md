@@ -13,13 +13,10 @@ raw/
 images
 ```  
 
-I'll walk through two examples with the same data: running DOLPHOT manually and running DOLPHOT with _pydolphot_.
+I'll walk through two examples with the same data: running DOLPHOT manually and running DOLPHOT with _pydolphot_. If you're a new user to DOLPHOT, it's important that you learn to use DOLPHOT manually in order to understand what happens under the hood of _pydolphot_ and when you inevitably need to troubleshoot.
 
 
 #### Running DOLPHOT manually 
-
-
-
 
 The first step is to copy the a reference image (usually a drizzled image) and all the science images (usually flt or flc images) from the raw directory to the current directory. Images will be modified by DOLPHOT and we want to preserve the originals in case its necessary to start over.
 
