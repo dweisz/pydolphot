@@ -72,6 +72,18 @@ Nimg = 4 # specifies the number of science images
 img0_file = jcnb01020_f814w_drc.chip1 # reference image
 img0_shift = 0 0  # shift in (x,y) pixels wrt to reference image. Should be set for reference image.
 img0_xform = 1 0 0 # scale ratio, cubic distortion, and rotation of the image relative to the reference image. Should be set for reference image.
+img1_file = jcnb01lyq_f475w_flc.chip1
+img1_shift = 0 0
+img1_xform = 1 0 0
+img2_file = jcnb01lyq_f475w_flc.chip1
+img2_shift = 0 0
+img2_xform = 1 0 0
+img3_file = jcnb01lyq_f475w_flc.chip1
+img3_shift = 0 0
+img3_xform = 1 0 0
+img4_file = jcnb01lyq_f475w_flc.chip1
+img4_shift = 0 0
+img4_xform = 1 0 0
 
 
 images
