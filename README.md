@@ -93,8 +93,6 @@ img4_xform = 1 0 0
 Next we have to set each of the photometry parameters for DOLPHOT.
 
 ``` tcsh
-> more phot.param 
-
 RAper = 3            #photometry apeture size (flt)
 Rchi = 3.0           #chi statistic apeture size (flt)
 PSFPhot = 1          #photometry type (int/0=aper,1=psf,2=wtd-psf)
