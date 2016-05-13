@@ -46,6 +46,6 @@ The next step is to run _calcsky_ on each image for each chip.  This includes bo
 * **r<sub>in</sub>** = 15
 * **r<sub>in</sub>** = 15
 * **step** = -128 (for a quick estimate; 4 for a more accurate, but slower measurement)
-* **$\sigma$<sub>low</sub>** = 2.25
-* **$\sigma$<sub>low</sub>** = 2.00
+* ** $\sigma$<sub>low</sub>** = 2.25
+* ** $\sigma$<sub>low</sub>** = 2.00
 
