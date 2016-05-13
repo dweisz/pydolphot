@@ -13,7 +13,7 @@ raw/
 images
 ```  
 
-I'll explore two examples, running DOLPHOT manually, and running DOLPHOT with _pydolphot_.
+I'll walk through two examples with the same data: running DOLPHOT manually and running DOLPHOT with _pydolphot_.
 
 
 #### Running DOLPHOT manually 
