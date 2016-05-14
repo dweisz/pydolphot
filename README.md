@@ -47,7 +47,7 @@ The next step is to run _splitgroups_, which splits the image files into each ch
 > ls
 jbin02021_drc.chip1.fits  jbin02exq_flc.fits	    jbin02f1q_flc.chip1.fits  jbin02f4q_flc.chip2.fits
 jbin02021_drc.fits	  jbin02ezq_flc.chip1.fits  jbin02f1q_flc.chip2.fits  jbin02f4q_flc.fits
-jbin02exq_flc.chip1.fits  jbin02ezq_flc.chip2.fits  jbin02f1q_flc.fits	      raw
+jbin02exq_flc.chip1.fits  jbin02ezq_flc.chip2.fits  jbin02f1q_flc.fits	      raw/
 jbin02exq_flc.chip2.fits  jbin02ezq_flc.fits	    jbin02f4q_flc.chip1.fits
 ```
 
@@ -62,12 +62,17 @@ The next step is to run _calcsky_ on each image for each chip.  This includes bo
 ``` tcsh
 > calcsky 
 > Usage: calcsky <fits base> <inner radius> <outer radius> <step> <lower sigma> <upper sigma>
-> calcsky fitsbase 15 35 -128 2.25 2.00 >> phot.log
-> calcsky fitsbase 15 35 -128 2.25 2.00 >> phot.log
-> calcsky fitsbase 15 35 -128 2.25 2.00 >> phot.log
-> calcsky fitsbase 15 35 -128 2.25 2.00 >> phot.log
+> calcsky jbin02021_drc.chip1 15 35 -128 2.25 2.00 >> phot.log
+> calcsky jbin02f1q_flc.chip1 15 35 -128 2.25 2.00 >> phot.log
+> calcsky jbin02f1q_flc.chip2 15 35 -128 2.25 2.00 >> phot.log
+> calcsky jbin02exq_flc.chip1 15 35 -128 2.25 2.00 >> phot.log
+> calcsky jbin02exq_flc.chip2 15 35 -128 2.25 2.00 >> phot.log
+...
 > ls
-images
+jbin02021_drc.chip1.fits  jbin02021_drc.chip1.sky.fits jbin02exq_flc.fits	    jbin02f1q_flc.chip1.fits  jbin02f1q_flc.chip1.sky.fits jbin02f4q_flc.chip2.fits  jbin02f4q_flc.chip2.sky.fits
+jbin02021_drc.fits	  jbin02ezq_flc.chip1.fits  jbin02ezq_flc.chip1.sky.fits  jbin02f1q_flc.chip2.fits   jbin02f1q_flc.chip2.sky.fits jbin02f4q_flc.fits
+jbin02exq_flc.chip1.fits  jbin02exq_flc.chip1.sky.fits  jbin02ezq_flc.chip2.fits  jbin02ezq_flc.chip2.sky.fits  jbin02f1q_flc.fits	      raw/
+jbin02exq_flc.chip2.fits   jbin02exq_flc.chip2.sky.fits  jbin02ezq_flc.fits	    jbin02f4q_flc.chip1.fits  jbin02f4q_flc.chip1.sky.fits
 ```
 
 Running _calcsky_ completes the preprocessing steps and now we can run DOLPHOT.  
