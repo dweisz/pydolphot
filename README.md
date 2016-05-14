@@ -11,7 +11,7 @@ This DOLPHOT example makes use of 'Grid 4' HST/ACS images from [HST-GO-12180](ht
 raw/
 > ls/raw/
 jbin02011_drc.fits.gz  jbin02exq_drc.fits.gz  jbin02ezq_drc.fits.gz  jbin02f1q_drc.fits.gz  jbin02f4q_drc.fits.gz
-jbin02021_drc.fits.gz  jbin02exq_flc.fits.gz  jbin02ezq_flc.fits.gz  jbin02f1q_flc.fits.gz  jbin02f4q_flc.fits.gz
+jbin02021_drc.fits.gz  jbin02exq_flc.fits.gz  jbin02ezq_flc.fits.gz  jbin02f1q_flc.fits.gz  jbin02f4q_flc.fits.gz 
 ```  
 
 I'll walk through two examples with the same data: running DOLPHOT manually and running DOLPHOT with _pydolphot_. If you're a new user to DOLPHOT, it's important that you learn to use DOLPHOT manually in order to understand what happens under the hood of _pydolphot_ and when you inevitably need to troubleshoot.
@@ -38,7 +38,7 @@ The next step is to run _acsmask_ (or _wfc3mask_/_wfpc2mask_, for WFC3/WFPC2 ima
 > acsmask jbin02f1q_flc.fits >> phot.log
 > acsmask jbin02f4q_flc.fits >> phot.log
 > ls
-jbin02021_drc.fits jbin02exq_flc.fits  jbin02ezq_flc.fits  jbin02f1q_flc.fits  jbin02f4q_flc.fits  raw/
+jbin02021_drc.fits jbin02exq_flc.fits  jbin02ezq_flc.fits  jbin02f1q_flc.fits  jbin02f4q_flc.fits  phot.log  raw/
 ```
 The next step is to run _splitgroups_, which splits the image files into each chip.  Some cameras, e.g., HST/HRC, do not have multiple chips.
 
@@ -47,7 +47,7 @@ The next step is to run _splitgroups_, which splits the image files into each ch
 > ls
 jbin02021_drc.chip1.fits  jbin02exq_flc.fits	    jbin02f1q_flc.chip1.fits  jbin02f4q_flc.chip2.fits
 jbin02021_drc.fits	  jbin02ezq_flc.chip1.fits  jbin02f1q_flc.chip2.fits  jbin02f4q_flc.fits
-jbin02exq_flc.chip1.fits  jbin02ezq_flc.chip2.fits  jbin02f1q_flc.fits	      raw/
+jbin02exq_flc.chip1.fits  jbin02ezq_flc.chip2.fits  jbin02f1q_flc.fits	      phot.log  raw/
 jbin02exq_flc.chip2.fits  jbin02ezq_flc.fits	    jbin02f4q_flc.chip1.fits
 ```
 
@@ -71,7 +71,7 @@ The next step is to run _calcsky_ on each image for each chip.  This includes bo
 > ls
 jbin02021_drc.chip1.fits  jbin02021_drc.chip1.sky.fits jbin02exq_flc.fits	    jbin02f1q_flc.chip1.fits  jbin02f1q_flc.chip1.sky.fits jbin02f4q_flc.chip2.fits  jbin02f4q_flc.chip2.sky.fits
 jbin02021_drc.fits	  jbin02ezq_flc.chip1.fits  jbin02ezq_flc.chip1.sky.fits  jbin02f1q_flc.chip2.fits   jbin02f1q_flc.chip2.sky.fits jbin02f4q_flc.fits
-jbin02exq_flc.chip1.fits  jbin02exq_flc.chip1.sky.fits  jbin02ezq_flc.chip2.fits  jbin02ezq_flc.chip2.sky.fits  jbin02f1q_flc.fits	      raw/
+jbin02exq_flc.chip1.fits  jbin02exq_flc.chip1.sky.fits  jbin02ezq_flc.chip2.fits  jbin02ezq_flc.chip2.sky.fits  jbin02f1q_flc.fits	      phot.log  raw/
 jbin02exq_flc.chip2.fits   jbin02exq_flc.chip2.sky.fits  jbin02ezq_flc.fits	    jbin02f4q_flc.chip1.fits  jbin02f4q_flc.chip1.sky.fits
 ```
 
@@ -83,22 +83,34 @@ First part of the DOLPHOT parameter file is specifying the reference and science
 ``` tcsh
 > more phot.param 
 
-Nimg = 4 # specifies the number of science images
-img0_file = jcnb01020_f814w_drc.chip1 # reference image
+Nimg = 8 # specifies the number of science images
+img0_file = jbin02021_drc.chip1 # reference image
 img0_shift = 0 0  # shift in (x,y) pixels wrt to reference image. Should not be set for reference image.
 img0_xform = 1 0 0 # scale ratio, cubic distortion, and rotation of the image relative to the reference image.Should not be set for reference image.
-img1_file = jcnb01lyq_f475w_flc.chip1
+img1_file = jbin02exq_f475w_flc.chip1
 img1_shift = 0 0
 img1_xform = 1 0 0
-img2_file = jcnb01lyq_f475w_flc.chip1
+img2_file = jbin02exq_f475w_flc.chip2
 img2_shift = 0 0
 img2_xform = 1 0 0
-img3_file = jcnb01lyq_f475w_flc.chip1
+img3_file = jbin02ezq_f475w_flc.chip
 img3_shift = 0 0
 img3_xform = 1 0 0
-img4_file = jcnb01lyq_f475w_flc.chip1
+img4_file = jbin02ezq_f475w_flc.chip2
 img4_shift = 0 0
 img4_xform = 1 0 0
+img5_file = jbin02f1q_flc.chip1
+img5_shift = 0 0
+img5_xform = 1 0 0
+img6_file = jbin02f1q_flc.chip2
+img6_shift = 0 0
+img6_xform = 1 0 0
+img7_file = jbin02f4q_flc.chip1
+img7_shift = 0 0
+img7_xform = 1 0 0
+img8_file = jbin02f4q_flc.chip2
+img8_shift = 0 0
+img8_xform = 1 0 0
 ```
 
 Next we have to set each of the photometry parameters for DOLPHOT.
@@ -161,8 +173,9 @@ Assuming this directory strucutre:
 > ls
 raw/
 > ls/raw/
-images
-```  
+jbin02011_drc.fits.gz  jbin02exq_drc.fits.gz  jbin02ezq_drc.fits.gz  jbin02f1q_drc.fits.gz  jbin02f4q_drc.fits.gz
+jbin02021_drc.fits.gz  jbin02exq_flc.fits.gz  jbin02ezq_flc.fits.gz  jbin02f1q_flc.fits.gz  jbin02f4q_flc.fits.gz 
+``` 
 
 _pydolphot_ provides a simpler interface that executes all the pre-processing steps and generates a DOLPHOT parameter file.
 
@@ -185,6 +198,17 @@ usage of _pydolphot_ requires numpy, glob, and astropy in order to handle .fits 
 /home/astro/photometry/NGC6822
 > python ../make_dolparam.py reference_file
 > ls
+jbin02021_drc.fits		    jbin02ezq_f475w_flc.chip1.sky.fits	jbin02f4q_f814w_flc.chip1.fits
+jbin02021_f814w_drc.chip1.fits	    jbin02ezq_f475w_flc.chip2.fits	jbin02f4q_f814w_flc.chip1.sky.fits
+jbin02021_f814w_drc.chip1.sky.fits  jbin02ezq_f475w_flc.chip2.sky.fits	jbin02f4q_f814w_flc.chip2.fits
+jbin02021_f814w_drc.fits	    jbin02ezq_f475w_flc.fits		jbin02f4q_f814w_flc.chip2.sky.fits
+jbin02exq_f475w_flc.chip1.fits	    jbin02ezq_flc.fits			jbin02f4q_f814w_flc.fits
+jbin02exq_f475w_flc.chip1.sky.fits  jbin02f1q_f814w_flc.chip1.fits	jbin02f4q_flc.fits
+jbin02exq_f475w_flc.chip2.fits	    jbin02f1q_f814w_flc.chip1.sky.fits	phot.log
+jbin02exq_f475w_flc.chip2.sky.fits  jbin02f1q_f814w_flc.chip2.fits	phot.param
+jbin02exq_f475w_flc.fits	    jbin02f1q_f814w_flc.chip2.sky.fits	raw
+jbin02exq_flc.fits		    jbin02f1q_f814w_flc.fits
+jbin02ezq_f475w_flc.chip1.fits	    jbin02f1q_flc.fits
 
 
 > dolphot ngc6822_acs_grid4.phot -pphot.param >> phot.log &
