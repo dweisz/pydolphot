@@ -22,11 +22,11 @@ I'll walk through two examples with the same data: running DOLPHOT manually and 
 The first step is to copy the a reference image (usually a drizzled image) and all the science images (usually flt or flc images) from the raw directory to the current directory. Images will be modified by DOLPHOT and we want to preserve the originals in case its necessary to start over.
 
 ``` tcsh
-> cp raw/drc .
+> cp raw/jbin02021_drc.fits.gz .
 > cp raw/*flc* .
 > gunzip *.gz
 > ls
-images
+jbin02021_drc.fits jbin02exq_flc.fits  jbin02ezq_flc.fits  jbin02f1q_flc.fits  jbin02f4q_flc.fits
 ```
 
 The next step is to run _acsmask_ (or _wfc3mask_/_wfpc2mask_, for WFC3/WFPC2 images) on each of the images and store the output in a log file.  _acsmask_ masks out all pixels flagged as bad in the data quality image, and multiplies by the pixel areas so that the resulting images are approximately in units of electrons on the raw image. A masked or saturated pixel is skipped by all other DOLPHOT routines - it is not used in sky determination, photometry, aperture corrections, etc.
