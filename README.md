@@ -10,7 +10,8 @@ This DOLPHOT example makes use of 'Grid 4' HST/ACS images from [HST-GO-12180](ht
 > ls
 raw/
 > ls/raw/
-images
+jbin02011_drc.fits.gz  jbin02exq_drc.fits.gz  jbin02ezq_drc.fits.gz  jbin02f1q_drc.fits.gz  jbin02f4q_drc.fits.gz
+jbin02021_drc.fits.gz  jbin02exq_flc.fits.gz  jbin02ezq_flc.fits.gz  jbin02f1q_flc.fits.gz  jbin02f4q_flc.fits.gz
 ```  
 
 I'll walk through two examples with the same data: running DOLPHOT manually and running DOLPHOT with _pydolphot_. If you're a new user to DOLPHOT, it's important that you learn to use DOLPHOT manually in order to understand what happens under the hood of _pydolphot_ and when you inevitably need to troubleshoot.
