@@ -7,12 +7,12 @@ import subprocess
 def makephotfiles(base, nstart, nruns, nimages):
 	for i in range(nstart,nstart+nruns):
 		for j in range(1, nimages):
-			subprocess.call("ln -s "+base+"."+np.str(j)+".res.fits "  base+"_"+np.str(i)+"."+np.str(j)+".res.fits", shell=True)
+			subprocess.call("ln -s "+base+"."+np.str(j)+".res.fits "  + base+"_"+np.str(i)+"."+np.str(j)+".res.fits", shell=True)
 			subprocess.call("ln -s "+base+"."+np.str(j)+".psf.fits " base+"_"+np.str(i)+"."+np.str(j)+".psf.fits", shell=True)
-			subprocess.call("ln -s "+base+".info " base+"_"+np.str(i)+".info", shell=True)
-			subprocess.call("ln -s "+base+".apcor " base+"_"+np.str(i)+".apcor", shell=True)
-			subprocess.call("ln -s "+base+".psfs " base+"_"+np.str(i)+".psfs", shell=True)
-			subprocess.call("ln -s "+base+".columns " base+"_"+np.str(i)+".columns", shell=True)
+			subprocess.call("ln -s "+base+".info " + base+"_"+np.str(i)+".info", shell=True)
+			subprocess.call("ln -s "+base+".apcor " + base+"_"+np.str(i)+".apcor", shell=True)
+			subprocess.call("ln -s "+base+".psfs " + base+"_"+np.str(i)+".psfs", shell=True)
+			subprocess.call("ln -s "+base+".columns " + base+"_"+np.str(i)+".columns", shell=True)
 
 		subprocess.call("ln -s "+base + " " + base+"_"+np.str(i))
 
