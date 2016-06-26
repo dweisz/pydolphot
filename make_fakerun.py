@@ -35,14 +35,36 @@ def makefakeparam(param_file, nstart, nruns):
 			f1.write("FakeStars=fake.list_"+np.str(i)+"\n")
 		f1.close()
 
+def makerunfake(rundir, base, nstart, nruns):
+	for i in range(nstart, nstart+nruns):
+		fakeparam = param_file+".fake_"+np.str(i)
+		outfile = "runfake"+np.str(i)
+		f = open(outfile, 'w')
+		f.write("cd " + rundir+"\n")
+		f.write("dolphot " + base+"_"+np.str(i)+ " -p" + fakeparam + " >> fake.log_"+np.str(i))
+		f.close()
+		subprocess.call("chmod +x " + outfile, shell=True)
+
+
+
+
+
+'''
+cd /clusterfs/dweisz/photometry/leop/
+dolphot leop_acs.phot_1 -pleop.fake.param_1 >> fake1.log
+'''
 
 #if __name__ == '__main__':
 
 base = sys.argv[1]
+rundir = sys.argv[2]
 
 makephotfiles(base, 1, 5, 12)
 
 makefakeparam('n4163.phot.param', 1, 5)
+
+makerunfake(rundir, base, 1, 5):
+
 #makefakelist(1,5, 'n4163_acs.phot', 'ACS_F606W', 'ACS_F814W', 18, 29, -1, 3)
 
 
