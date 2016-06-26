@@ -28,6 +28,8 @@ def makefakeparam(param_file, nstart, nruns):
 		outfile = param_file+".fake_"+np.str(i)
 		with open(infile) as f, open(outfile, 'w') as f1:
 			for line in f:
+				# only tru for flc files
+				# onlt setup for ACS currently
 				if not "ACSuseCTE" in line:
 					f1.write(line)
 			f1.write("ACSuseCTE = 1\n")
