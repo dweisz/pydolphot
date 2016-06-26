@@ -19,7 +19,7 @@ def makephotfiles(base, nstart, nruns, nimages):
 
 def makefakelist(nstart, nruns, photfile,filter1, filter2, fmin, fmax, cmin, cmax, nstars=100000):
 	for i in range(nstart, nstart+nruns):
-		subprocess.call('fakelist '+ np.str(photfile) + ' ' + np.str(filter1) + ' ' + np.str(filter2) + ' ' + np.str(fmin) + ' ' + np.str(fmax) + ' ' + np.str(cmin) + ' ' + np.str(cmax) + ' ' + "-nstar= " + np.str(nstars) + "> fake.list_" + np.str(i), shell=True)
+		subprocess.call('fakelist '+ np.str(photfile) + ' ' + np.str(filter1) + ' ' + np.str(filter2) + ' ' + np.str(fmin) + ' ' + np.str(fmax) + ' ' + np.str(cmin) + ' ' + np.str(cmax) + ' ' + "-nstar=" + np.str(nstars) + "> fake.list_" + np.str(i), shell=True)
 
 
 def makefakeparam(param_file, nstart, nruns):
