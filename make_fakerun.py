@@ -4,7 +4,7 @@ import subprocess
 
 
 
-def makephotfiles(base, nstart=1, nruns, nimages):
+def makephotfiles(base, nstart, nruns, nimages):
 	for i in range(nstart,nstart+nruns):
 		for j in range(1,nimages):
 			subprocess.call("rm -rf *.fits " + param_file+" "+log_file, shell=True)
@@ -17,7 +17,7 @@ def makephotfiles(base, nstart=1, nruns, nimages):
 
 		subprocess.call("ln -s "+base, base+"_"+np.str(i))
 
-def makefakelist(nruns, nstart=1, photfile,filter1, filter2, fmin, fmax, cmin, cmax, nstars=100000):
+def makefakelist(nruns, nstart, photfile,filter1, filter2, fmin, fmax, cmin, cmax, nstars=100000):
 	for i in range(nstart, nstart+nruns):
 		subprocess.call('fakelist '+ np.str(photfile) + ' ' + np.str(filter1) + ' ' + np.str(filter2) + ' ' + np.str(fmin) + ' ' + np.str(fmax) + ' ' + np.str(cmin) + ' ' + np.str(cmax) + ' ' + "-nstar= " + np.str(nstars) + "> fake.list_" + np.str(i), shell=True)
 
