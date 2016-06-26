@@ -17,7 +17,7 @@ def makephotfiles(base, nstart, nruns, nimages):
 
 		subprocess.call("ln -s "+base, base+"_"+np.str(i))
 
-def makefakelist(nruns, nstart, photfile,filter1, filter2, fmin, fmax, cmin, cmax, nstars=100000):
+def makefakelist(nstart, nruns, photfile,filter1, filter2, fmin, fmax, cmin, cmax, nstars=100000):
 	for i in range(nstart, nstart+nruns):
 		subprocess.call('fakelist '+ np.str(photfile) + ' ' + np.str(filter1) + ' ' + np.str(filter2) + ' ' + np.str(fmin) + ' ' + np.str(fmax) + ' ' + np.str(cmin) + ' ' + np.str(cmax) + ' ' + "-nstar= " + np.str(nstars) + "> fake.list_" + np.str(i), shell=True)
 
@@ -28,7 +28,7 @@ def makefakeparam(param_file, nstart, nruns):
 		outfile = param_file+".fake_"+np.str(i)
 		with open(infile) as f, open(outfile, 'w') as f1:
 			for line in f:
-				# only tru for flc files
+				# only true for flc files
 				# onlt setup for ACS currently
 				if not "ACSuseCTE" in line:
 					f1.write(line)
@@ -41,6 +41,7 @@ def makefakeparam(param_file, nstart, nruns):
 
 #if __name__ == '__main__':
 makefakeparam('n4163.phot.param', 1, 5)
+makefakelist(1,5, 'n4163_acs.phot', 'F606W', 'F814W', 18, 29, -1, 3)
 
 
 
