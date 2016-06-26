@@ -29,10 +29,10 @@ def makefakeparam(param_file, nstart, nruns):
 		with open(infile) as f, open(outfile, 'w') as f1:
 			for line in f:
 				if not "ACSuseCTE" in line:
-					f1.append(line)
-			f1.append("RandomFake = 1\n")
-			f1.append("FakeMatch=3.0\n")
-			f1.append("FakeStars=fake.list_"+np.str(i))
+					f1.write(line)
+			f1.write("RandomFake = 1\n")
+			f1.write("FakeMatch=3.0\n")
+			f1.write("FakeStars=fake.list_"+np.str(i))
 		f1.close()
 
 
