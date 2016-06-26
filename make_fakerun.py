@@ -35,7 +35,7 @@ def makefakeparam(param_file, nstart, nruns):
 			f1.write("FakeStars=fake.list_"+np.str(i)+"\n")
 		f1.close()
 
-def makerunfake(rundir, base, nstart, nruns):
+def makerunfake(rundir, base, param_file, nstart, nruns):
 	for i in range(nstart, nstart+nruns):
 		fakeparam = param_file+".fake_"+np.str(i)
 		outfile = "runfake"+np.str(i)
@@ -63,7 +63,7 @@ makephotfiles(base, 1, 5, 12)
 
 makefakeparam('n4163.phot.param', 1, 5)
 
-makerunfake(rundir, base, 1, 5)
+makerunfake(rundir, base, 'n4163.phot.param', 1, 5)
 
 #makefakelist(1,5, 'n4163_acs.phot', 'ACS_F606W', 'ACS_F814W', 18, 29, -1, 3)
 
