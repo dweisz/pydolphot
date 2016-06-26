@@ -4,7 +4,7 @@ import subprocess
 
 def makephotfiles(base, nstart, nruns, nimages):
 	for i in range(nstart,nstart+nruns):
-		for j in range(1, nimages):
+		for j in range(1, nimages+1):
 			subprocess.call("ln -s "+base+"."+np.str(j)+".res.fits "  + base+"_"+np.str(i)+"."+np.str(j)+".res.fits", shell=True)
 			subprocess.call("ln -s "+base+"."+np.str(j)+".psf.fits " + base+"_"+np.str(i)+"."+np.str(j)+".psf.fits", shell=True)
 			subprocess.call("ln -s "+base+".info " + base+"_"+np.str(i)+".info", shell=True)
