@@ -36,12 +36,9 @@ def makefakeparam(param_file, nstart, nruns):
 		f1.close()
 
 
-if __name__ == '__main__':
-
-#base = sys.argv[1]
-
-	makefakeparam('n4163.phot.param', 1, 5)
+#if __name__ == '__main__':
+makefakeparam('n4163.phot.param', 1, 5)
 
 
 
-main()
+#main()
