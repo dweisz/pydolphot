@@ -42,7 +42,7 @@ def makefakeparam(param_file, nstart, nruns):
 
 base = sys.argv[1]
 
-makephotfiles(base, 1, 5, 12)
+makephotfiles(np.str(base), 1, 5, 12)
 
 makefakeparam('n4163.phot.param', 1, 5)
 #makefakelist(1,5, 'n4163_acs.phot', 'ACS_F606W', 'ACS_F814W', 18, 29, -1, 3)
