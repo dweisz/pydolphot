@@ -26,7 +26,7 @@ def makefakeparam(param_file, nstart, nruns):
 	infile = param_file
 	for i in range(nstart, nstart+nruns):
 		outfile = param_file+".fake_"+np.str(i)
-		with open(infile) as f, open(outfile) as f1:
+		with open(infile) as f, open(outfile, 'w') as f1:
 			for line in f:
 				if not "ACSuseCTE" in line:
 					f1.append(line)
@@ -40,7 +40,7 @@ if __name__ == '__main__':
 
 #base = sys.argv[1]
 
-	makefakeparam('n4163.phot.param', 1, 5)
+	makefakeparam('n4163.param', 1, 5)
 
 
 
