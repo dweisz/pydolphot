@@ -5,7 +5,7 @@ from astropy import units as u
 from astropy.io import fits
 from astropy import wcs
 import pdb
-import pylab as plt
+#import pylab as plt
 
 ''' Uses astropy tables to translate raw DOLPHOT photometric catalogs into summary .fits files '''
 
