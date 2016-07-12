@@ -58,15 +58,18 @@ dolphot leop_acs.phot_1 -pleop.fake.param_1 >> fake1.log
 
 base = sys.argv[1]
 rundir = sys.argv[2]
+nimages = sys.argv[3]
+nruns = sys.argv[4]
+name = sys.argv[5]
 
-nimages = 12
-nruns = 72
+#nimages = 12
+#nruns = 72
 
 makephotfiles(base, 1, nruns , nimages)
 
-makefakeparam('n4163.phot.param', 1, nruns)
+makefakeparam(name+'.phot.param', 1, nruns)
 
-makerunfake(rundir, base, 'n4163.phot.param', 1, nruns)
+makerunfake(rundir, base, name+'.phot.param', 1, nruns)
 
 #makefakelist(1,5, 'n4163_acs.phot', 'ACS_F606W', 'ACS_F814W', 18, 29, -1, 3)
 
