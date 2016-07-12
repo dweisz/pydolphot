@@ -71,7 +71,7 @@ makefakeparam(name+'.phot.param', 1, nruns)
 
 makerunfake(rundir, base, name+'.phot.param', 1, nruns)
 
-#makefakelist(1,5, 'n4163_acs.phot', 'ACS_F606W', 'ACS_F814W', 18, 29, -1, 3)
+makefakelist(1,nruns, base, 'ACS_F606W', 'ACS_F814W', 18, 29, -1, 2)
 
 
 
