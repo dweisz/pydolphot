@@ -58,8 +58,8 @@ dolphot leop_acs.phot_1 -pleop.fake.param_1 >> fake1.log
 
 base = sys.argv[1]
 rundir = sys.argv[2]
-nimages = sys.argv[3]
-nruns = sys.argv[4]
+nimages = np.int(sys.argv[3])
+nruns = np.int(sys.argv[4])
 name = sys.argv[5]
 
 #nimages = 12
