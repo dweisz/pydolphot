@@ -1,6 +1,7 @@
 import numpy as np
-import sys
+import sys 
 import subprocess
+
 
 def makephotfiles(base, nstart, nruns, nimages):
 	for i in range(nstart,nstart+nruns):
