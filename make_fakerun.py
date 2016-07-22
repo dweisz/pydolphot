@@ -30,7 +30,10 @@ def makefakeparam(param_file, nstart, nruns):
 				# onlt setup for ACS currently
 				if not "ACSuseCTE" in line:
 					f1.write(line)
+				if not "WFC3useCTE" in line:
+					f1.write(line)
 			f1.write("ACSuseCTE = 1\n")
+			f1.write("WFC3useCTE = 1\n")
 			f1.write("RandomFake = 1\n")
 			f1.write("FakeMatch=3.0\n")
 			f1.write("FakeStars=fake.list_"+np.str(i)+"\n")
@@ -62,6 +65,7 @@ rundir = sys.argv[2]
 nimages = np.int(sys.argv[3])
 nruns = np.int(sys.argv[4])
 name = sys.argv[5]
+filters = sys.argv[6]
 
 #nimages = 12
 #nruns = 72
@@ -72,7 +76,7 @@ makefakeparam(name+'.phot.param', 1, nruns)
 
 makerunfake(rundir, base, name+'.phot.param', 1, nruns)
 
-makefakelist(1,nruns, base, 'ACS_F606W', 'ACS_F814W', 18, 29, -1, 2)
+makefakelist(1,nruns, base, filters.split()[0], filters.split()[1], 18, 29, -1, 3)
 
 
 
