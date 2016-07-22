@@ -28,7 +28,7 @@ def makefakeparam(param_file, nstart, nruns):
 			for line in f:
 				# only true for flc files
 				# onlt setup for ACS currently
-				if not "ACSuseCTE" or "WFC3useCTE" in line:
+				if not "ACSuseCTE" or not "WFC3useCTE" in line:
 					f1.write(line)
 				#if not "WFC3useCTE" in line:
 				#	f1.write(line)
