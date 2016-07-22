@@ -28,10 +28,10 @@ def makefakeparam(param_file, nstart, nruns):
 			for line in f:
 				# only true for flc files
 				# onlt setup for ACS currently
-				if not "ACSuseCTE" in line:
+				if not "ACSuseCTE" or "WFC3useCTE" in line:
 					f1.write(line)
-				if not "WFC3useCTE" in line:
-					f1.write(line)
+				#if not "WFC3useCTE" in line:
+				#	f1.write(line)
 			f1.write("ACSuseCTE = 1\n")
 			f1.write("WFC3useCTE = 1\n")
 			f1.write("RandomFake = 1\n")
