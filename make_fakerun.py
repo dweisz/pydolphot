@@ -76,7 +76,7 @@ makefakeparam(name+'.phot.param', 1, nruns)
 
 makerunfake(rundir, base, name+'.phot.param', 1, nruns)
 
-makefakelist(1,nruns, base, filters.split()[0], filters.split()[1], 18, 29, -1, 3)
+makefakelist(1,nruns, base, filters.split()[0], filters.split()[1], 16, 29, -0.5, 3.5)
 
 
 
