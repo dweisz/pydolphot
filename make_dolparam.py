@@ -191,7 +191,7 @@ def image_params(images, img_num, camera, paramfile):
 
 	uvis_params = { 
 		'raper': '3',
-		'rchi': '1.0',
+		'rchi': '2.0',
 		'rsky0': '15',
 		'rsky1': '35',
 		'rpsf': '10',
@@ -258,12 +258,12 @@ def dolparams(paramfile):
 	# need to add WFPC2 data
 	# should automatically adjust values according to image types
 	dolphot_params = {
-	'RAper': 3,
-	'Rchi': 2.0,
+	#'RAper': 3,
+	#'Rchi': 2.0,
 	'PSFPhot': 1,
 	'FitSky': 2,
-	'RSky0': 15,
-	'RSky1': 35,
+	#'RSky0': 15,
+	#'RSky1': 35,
 	'SkipSky': 2,
 	'SkySig': 2.25,
 	'SecondPass': 5,
