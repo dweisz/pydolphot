@@ -180,7 +180,7 @@ def image_params(images, img_num, camera, paramfile):
 
 	acs_params = {
 		'raper': '3',
-		'rchi': '1.0',
+		'rchi': '2.0',
 		'rsky0': '15',
 		'rsky1': '35',
 		'rpsf': '10',
@@ -259,7 +259,7 @@ def dolparams(paramfile):
 	# should automatically adjust values according to image types
 	dolphot_params = {
 	'RAper': 3,
-	'Rchi': 3.0,
+	'Rchi': 2.0,
 	'PSFPhot': 1,
 	'FitSky': 2,
 	'RSky0': 15,
@@ -283,9 +283,9 @@ def dolparams(paramfile):
 	'RCentroid': 1,
 	'PosStep': 0.25,
 	'dPosMax': 2.5,
-	'RCombine': 3.0,
+	'RCombine': 1.415,
 	'RPSF': 10,
-	'SigPSF': 5.0,
+	'SigPSF': 3.0,
 	'PSFres': 1,
 	'psfoff': 0.0,
 	'DiagPlotType': 'PS',
