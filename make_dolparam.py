@@ -106,6 +106,8 @@ def proc_wfc3(files, log_file='phot.log', ref=False):
 	for i in range(len(files)):
 		hdu = fits.open(files[i])
 		f1 = hdu[0].header['filter']
+		det = hdu[0].header['DETECTOR']
+		det_store.append(det)
 		name = files[i].split('_')
 		filter = f1.swapcase()
 		newname = name[0]+'_'+filter+'_'+name[1]
@@ -113,7 +115,9 @@ def proc_wfc3(files, log_file='phot.log', ref=False):
 		newname_store.append(newname)
 		hdu.writeto(newname, clobber=True)
 
+	# old wfc3/IR syntax
 	# run wfc3mask on all WFC3 files
+	'''
 	splitnames = []
 	for j in newname_store:
 		subprocess.call("wfc3mask " + j + " > " + log_file, shell=True)
@@ -126,6 +130,29 @@ def proc_wfc3(files, log_file='phot.log', ref=False):
 			splitnames.append(j.replace('.fits', '.chip1.fits'))
 			subprocess.call("calcsky "+ j.replace('.fits', '.chip2') +"  15 35 -128 2.25 2.00 >> " + log_file, shell=True)
 			splitnames.append(j.replace('.fits', '.chip2.fits'))
+	# only works for 2 filters for right now
+	return splitnames
+	'''
+
+	# Charlie's fix to deal with WFC3/IR chips
+	# run wfc3mask on all WFC3 files
+	splitnames = []
+	for i in range(len(newname_store)):
+		j = newname_store[i]
+		subprocess.call("wfc3mask " + j + " > " + log_file, shell=True)
+		subprocess.call("splitgroups " + j + " > " + log_file, shell=True)
+		if ref == True:
+			subprocess.call("calcsky "+ j.replace('.fits', '.chip1') +"  15 35 -128 2.25 2.00 >> " + log_file, shell=True)
+			splitnames.append(j.replace('.fits', '.chip1.fits'))
+		elif ref == False:
+			if det_store[i] == 'IR':
+				subprocess.call("calcsky "+ j.replace('.fits', '.chip1') +"  15 35 -128 2.25 2.00 >> " + log_file, shell=True)
+				splitnames.append(j.replace('.fits', '.chip1.fits'))
+			else:
+				subprocess.call("calcsky "+ j.replace('.fits', '.chip1') +"  15 35 -128 2.25 2.00 >> " + log_file, shell=True)
+				splitnames.append(j.replace('.fits', '.chip1.fits'))
+				subprocess.call("calcsky "+ j.replace('.fits', '.chip2') +"  15 35 -128 2.25 2.00 >> " + log_file, shell=True)
+				splitnames.append(j.replace('.fits', '.chip2.fits'))
 	# only works for 2 filters for right now
 	return splitnames
 
