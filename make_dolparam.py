@@ -266,7 +266,7 @@ def image_params(images, img_num, camera, paramfile):
 	file.write("\n")
 	file.close()
 	file = open(paramfile, 'a')
-	k=1 # reset image counter
+	k = img_num # reset image counter
         for j in images:
                 file.write("img"+np.str(k)+'_shift = ' + params['shift'] + "\n")
                 file.write("img"+np.str(k)+'_xform = ' + params['xform']  + "\n")
