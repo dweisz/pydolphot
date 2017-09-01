@@ -15,7 +15,7 @@ def load_files(ref_file,rawdir='raw/', log_file='phot.log', param_file='phot.par
 	# remove old fits, parameter files
 	subprocess.call("rm -rf *.fits " + param_file+" "+log_file, shell=True)
 
-	rawfiles = glob.glob(rawdir+'/*fits*')
+	rawfiles = sorted(glob.glob(rawdir+'/*fits*'))
 	filenames = [j.replace(rawdir, "") for j in rawfiles]
 
 	# get rid of drz or drc files from rawlist
