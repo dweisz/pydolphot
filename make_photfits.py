@@ -71,7 +71,7 @@ def make_phot(datafile, refname, filters, outname, full=False, summary=True, gst
 			# assumes only 2 bands for now
 			snr = 5.
 			sharp = 0.1
-			crowd = 10.
+			crowd = 1.
 			objtype = 1
 
 			wgood = np.where( (t[filters[0]+'_SNR'] >= snr) & (t[filters[1]+'_SNR'] >= snr) &
