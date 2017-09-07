@@ -103,6 +103,7 @@ def proc_wfc3(files, log_file='phot.log', ref=False):
 	# rename files to include filter name
 	newname_store = []
 	f1_store = []
+	det_store = []
 	for i in range(len(files)):
 		hdu = fits.open(files[i])
 		f1 = hdu[0].header['filter']
