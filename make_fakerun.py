@@ -29,22 +29,15 @@ def makefakeparam(param_file, base, nruns, nstart=1):
 		fakeparam = "phot.fake_"+np.str(i)+".param"
 		subprocess.call("cp "+infile+" "+fakeparam, shell=True)
 		outfile = fakeparam
-		#with open(fakeparam, 'r') as f, open(fakeparam, #'w') as f1:
-		#	for line in f:
-		#		# only true for flc files
-		#		# onlt setup for ACS currently
-		#		if not "ACSuseCTE" or not "WFC3useCTE" in line:
-		#			f1.write(line)
-		#		#if not "WFC3useCTE" in line:
-		#		#	f1.write(line)
-			f1.write("ACSuseCTE = 1\n")
-			f1.write("WFC3useCTE = 1\n")
-			f1.write("RandomFake = 1\n")
-			f1.write("FakeMatch=3.0\n")
-			f1.write("FakePad=0\n")
-			f1.write("FakeStarPSF = 1.5\n")
-			f1.write("FakeOut="+base+"_fake_"+np.str(i)+".fake\n")
-			f1.write("FakeStars=fake.list_"+np.str(i)+"\n")
+		open(fakeparam, 'w') as f1
+		f1.write("ACSuseCTE = 1\n")
+		f1.write("WFC3useCTE = 1\n")
+		f1.write("RandomFake = 1\n")
+		f1.write("FakeMatch=3.0\n")
+		f1.write("FakePad=0\n")
+		f1.write("FakeStarPSF = 1.5\n")
+		f1.write("FakeOut="+base+"_fake_"+np.str(i)+".fake\n")
+		f1.write("FakeStars=fake.list_"+np.str(i)+"\n")
 		f1.close()
 
 def makerunfake(param_file, base, nruns, nstart=1):
