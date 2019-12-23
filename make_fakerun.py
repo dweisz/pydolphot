@@ -53,7 +53,7 @@ def makerunfake(param_file, base, nruns, nstart=1):
 		outfile = "runfake"+np.str(i)
 		f = open(outfile, 'w')
 		f.write("cd " + os.getcwd()+"\n")
-		f.write("dolphot " + base+"_"+np.str(i)+ " -p" + fakeparam + " >> fake.log_"+np.str(i))
+		f.write("dolphot " + base+ " -p" + fakeparam + " >> fake.log_"+np.str(i))
 		f.close()
 		subprocess.call("chmod +x " + outfile, shell=True)
 
