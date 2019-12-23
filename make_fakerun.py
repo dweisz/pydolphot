@@ -29,14 +29,14 @@ def makefakeparam(param_file, base, nruns, nstart=1):
 		fakeparam = "phot.fake_"+np.str(i)+".param"
 		subprocess.call("cp "+infile+" "+fakeparam, shell=True)
 		outfile = fakeparam
-		with open(fakeparam, 'r') as f, open(fakeparam, 'w') as f1:
-			for line in f:
-				# only true for flc files
-				# onlt setup for ACS currently
-				if not "ACSuseCTE" or not "WFC3useCTE" in line:
-					f1.write(line)
-				#if not "WFC3useCTE" in line:
-				#	f1.write(line)
+		#with open(fakeparam, 'r') as f, open(fakeparam, #'w') as f1:
+		#	for line in f:
+		#		# only true for flc files
+		#		# onlt setup for ACS currently
+		#		if not "ACSuseCTE" or not "WFC3useCTE" in line:
+		#			f1.write(line)
+		#		#if not "WFC3useCTE" in line:
+		#		#	f1.write(line)
 			f1.write("ACSuseCTE = 1\n")
 			f1.write("WFC3useCTE = 1\n")
 			f1.write("RandomFake = 1\n")
