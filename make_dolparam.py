@@ -266,6 +266,7 @@ def image_params(images, img_num, camera, paramfile):
 		k+=1
 	file.write("\n")
 	file.close()
+	'''
 	file = open(paramfile, 'a')
 	k = img_num # reset image counter
         for j in images:
@@ -280,6 +281,7 @@ def image_params(images, img_num, camera, paramfile):
                 k+=1
 	file.write("\n")
         file.close()
+    '''
 	
 
 def dolparams(paramfile):
@@ -296,7 +298,7 @@ def dolparams(paramfile):
 	'SkySig': 2.25,
 	'SecondPass': 5,
 	'SearchMode': 1,
-	'SigFind': 2.5,
+	'SigFind': 3.0,
 	'SigFindMult':0.85,
 	'SigFinal': 3.5,
 	'SubResRef': 1,
@@ -315,15 +317,18 @@ def dolparams(paramfile):
 	'RPSF': 10,
 	'SigPSF': 3.0,
 	'PSFres': 1,
+	'InterpPSFlib': 1,
 	'psfoff': 0.0,
 	'DiagPlotType': 'PS',
-	'UseWCS': 1,
+	'UseWCS': 2,
 	'ACSpsfType': 0,
 	'ACSuseCTE': 0,
 	'WFC3UVISpsfType': 0,
 	'WFC3IRpsfType': 0,
 	'WFC3useCTE': 0,
 	'CombineChi': 1,
+	'aligntol': 4,
+	'alignstep': 2,
 	'#FakeStars': 'fake.list',
 	'#FakeMatch': 3.0,
 	'#FakeStarPSF': 1.5,
